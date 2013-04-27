@@ -3,6 +3,7 @@ var KeyFilterStream = require("./lib/keyfilterstream");
 var JoinStream = require("./lib/joinstream");
 var CallbackStream = require("./lib/callbackstream");
 var Variable = require("./lib/variable");
+var msgpack = require("msgpack");
 
 var defs = {
   spo: ["subject", "predicate", "object"],
@@ -83,9 +84,9 @@ function genKeys(triple) {
 }
 
 function genActions(action, triple) {
-  var json = JSON.stringify(triple);
+  var value = msgpack.pack(triple);
   return genKeys(triple).map(function(key) {
-    return { type: action, key: key, value: json };
+    return { type: action, key: key, value: value, valueEncoding: "binary" };
   });
 }
 
@@ -105,7 +106,8 @@ function createQuery(pattern) {
   var key = genKey(possibleDefs[0], pattern);
   var query = {
     start: key,
-    fillCache: true
+    fillCache: true,
+    valueEncoding: "binary"
   };
 
   return query;
