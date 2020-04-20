@@ -1,7 +1,6 @@
 {
   "node": true,
   "browser": true,
-  "es5": true,
   "curly": true,
   "eqeqeq": true,
   "immed": true,
@@ -21,6 +20,7 @@
     "afterEach": false,
     "expect": false,
     "it": false,
+    "setImmediate": false,
     "sinon": false
   }
 }

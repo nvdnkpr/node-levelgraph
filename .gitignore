@@ -16,3 +16,6 @@ npm-debug.log
 .idea
 docs
 .DS_Store
+coverage
+
+package-lock.json
